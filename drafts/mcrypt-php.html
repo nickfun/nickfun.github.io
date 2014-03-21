@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Implementation Specific</title>
+        <title>MCrypt & PHP</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -14,18 +14,35 @@
         <header id="banner" class="body">
                 <h1><a href="/">Implementation Specific </a></h1>
                 <nav><ul>
-                    <li><a href="/category/misc.html">misc</a></li>
+                    <li class="active"><a href="/category/misc.html">misc</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
-<h1>Archives for Implementation Specific</h1>
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/posts/2014/mcrypt-php.html" rel="bookmark"
+           title="Permalink to MCrypt & PHP">MCrypt & PHP</a></h1>
+    </header>
 
-<dl>
-    <dt>Thu 20 March 2014</dt>
-    <dd><a href="/posts/2014/geeks-4-good-jam.html">Geeks 4 Good jam</a></dd>
-    <dt>Sat 22 February 2014</dt>
-    <dd><a href="/posts/2014/background.html">Background</a></dd>
-</dl>
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2014-03-08T21:14:00">
+                Sat 08 March 2014
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
+        </address>
+<p>In <a href="/category/misc.html">misc</a>. </p>
+
+</footer><!-- /.post-info -->      <p>So I was trying to do some work on a side project in Laravel, and I couldn't run anything because it needed 
+the <code>mcrypt</code> PHP extension installed. The <code>artisan</code> utility will not run without mcrypt!</p>
+<p>I run ubuntu everywhere, so I thought I could solve the problem with <code>sudo apt-get install php5-mcrypt</code> and
+while that command completed successfully, artisan still wouldn't run!</p>
+    </div><!-- /.entry-content -->
+
+  </article>
 </section>
         <section id="extras" class="body">
                 <div class="blogroll">
