@@ -14,6 +14,7 @@
         <header id="banner" class="body">
                 <h1><a href="/">Implementation Specific </a></h1>
                 <nav><ul>
+                    <li><a href="/category/code.html">code</a></li>
                     <li><a href="/category/misc.html">misc</a></li>
                     <li><a href="/category/teach.html">teach</a></li>
                 </ul></nav>
@@ -21,7 +22,71 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/posts/2014/switching-to-java-at-work.html">Switching to Java at work</a></h1>
+                    <h1 class="entry-title"><a href="/posts/2014/emacs.html">Emacs</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-05-11T23:01:00">
+                Sun 11 May 2014
+        </abbr>
+
+        <address class="vcard author">
+                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
+        </address>
+<p>In <a href="/category/code.html">code</a>. </p>
+
+</footer><!-- /.post-info --><p>I believe I first used emacs back in my community college days. I had access to
+a Linux machine for a few classes. We often worked in the terminal and I needed
+a good text editor. I have tried vi &amp; vim several times, but I could never get
+used to the idea of several modes. I would often switch to a different mode
+unexpectedly and things would get really bad. I never had <em>that</em> problem with
+emacs, so I would usually use emacs.</p>
+<p>Eventually, I tried diving in to emacs to see what I could get it to do. I knew
+it had a reputation for extensions and while I wasn't planning on writing my own
+I wanted to take advantage of anything that was out there. While reading some
+docs I found out how to split the window and view two files at the same time.
+That was when I decided to never even try vim again and to stay away from nano/pico.</p>
+<p>My decision was justified once I learned about org-mode.</p>
+<p>At work I have been using Org-mode to keep track of my time. Our bug tracker, Redmine,
+lets you log time for how long a bug takes. The boss has asked us to submit a time with
+bugs that we close. Org-mode makes it wicked easy to add task, clock in, and generate
+a report when needed. I've got a giant file that I've been keeping since the beginning
+of the year, 5 months ago. I should look into how to split it into different files.</p>
+<h2>Time to go all in</h2>
+<p>The other day I saw the "Emacs Rocks" video that showed multiple-cursors mode. I knew then
+that it was time to go all-in with emacs. Sublime text has been my main code editor
+since at least 2011. I have become very productive in it because of its built-in multi 
+cursor support. I had never used a system like that before and it was easy to see
+how I could use it to speed up dealing with code in patterns. </p>
+<p>I haven't yet taken the time to setup multiple-cursors mode, but I am investing more in 
+emacs. I have it setup on my personal computers now. I setup the marmalade repo to 
+easily install plug-ins. I have chosen a theme to run with (zenburn) and will try
+to move myself into a emacs way of life.</p>
+<h2>Emacs Lisp</h2>
+<p>I have always wanted to learn Lisp or Scheme. In my Programming Language Concepts class
+in University we were given an intro to Scheme. I was pretty blown away by how different
+the language was to everything else I had used at that point. I was a pretty good
+programmer, but I had trouble wrapping my mind around Scheme. I have wanted to spend
+more time with it ever since, and I've never really been able to take it on.</p>
+<p>Emacs is famous for having its own Lisp built in: elisp. Sadly, the language is really
+old and it has not evolved along with other languages. I understand the variable scope
+system is weird in elisp and it has bad support for namespaces. However, I still want
+to learn it. It will be profitable for me to learn to extend emacs, and I fill finally
+get to learn a lisp! I'm rather excited.</p>
+<p>There is a "Intro to elisp" manual that GNU published a few years ago that they give
+away for free. I am slowly working through it. I keep a "stuff" repo on GitHub that
+I use for experiments. My plan now is that all my experiments will be Emacs oriented.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/posts/2014/switching-to-java-at-work.html" rel="bookmark"
+                           title="Permalink to Switching to Java at work">Switching to Java at work</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2014-05-08T13:37:00">
                 Thu 08 May 2014
@@ -32,31 +97,11 @@
         </address>
 <p>In <a href="/category/misc.html">misc</a>. </p>
 
-</footer><!-- /.post-info --><p>So at my day job I have always used PHP for back-end work. But I am happy so say that I finally get to expand into Java for
-some things! I know that Java as a language is not the hottest thing anymore, but I think it is really good for me to
-move away from PHP.</p>
-<h2>Transition away</h2>
-<p>We already have a network server written in Java: the "ATP Client" and now we are expanding to at least one more Java
-system and maybe another. My coworker and I are building a reporting system in Java. It is rather boring and complex
-but I'm happy to be moving into a "real" language because PHP just can't deal with the things we want to do.</p>
-<p>PHP is the worst environment to do background processing. We want Reports and a few other things to run in the background,
-so we have to bring in something better. Pretty much everything is better than PHP.</p>
-<h2>Outlook</h2>
-<p>I'm glad that we are introducing more Java into the project. Currently, the report server runs inside Tomcat so that
-we can communicate with it over HTTP. There is talk of bringing in RabbitMQ, and I really hope it happens. Then we can
-drop Tomcat and just communicate with the report server on the message queue. That will be cleaner, I think.</p>
-<p>Eventually I think we will have to re-write all of the web back-end, and I hope we get to do that in a language other
-than PHP also. I think Groovy or Python would be a great fit for us. We can keep coding without worrying about types
-or defining our data structures with classes, and we will have better access to background processing.</p>
-<h2>Dev notes</h2>
-<p>We are using Netbeans to develop or new java code. The boss, who wrote the current Java network server, doesn't use a 
-full IDE for development. He uses UEEditor I think. It's like a suped-up version of Notepad++. I like Netbeans a lot
-and it has been pretty smooth. I love that now I can setup unit tests and easily run them. </p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>So at my day job I have always used PHP for back-end work. But I am happy so say that I finally get to expand into Java for
+some things! I know that Java as a language is not the hottest thing anymore, but I think it is really good ...</p>
+                <a class="readmore" href="/posts/2014/switching-to-java-at-work.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
