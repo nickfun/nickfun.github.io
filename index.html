@@ -1,258 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-        <meta charset="utf-8" />
-        <title>Implementation Specific</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+    <title>Implementation Specific</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="website"/>
+            <meta property="og:title" content="Implementation Specific"/>
+            <meta property="og:url" content=""/>
+            <meta property="og:description" content="Implementation Specific"/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/theme/css/custom-nick.css" rel="stylesheet">
+
+
 </head>
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Implementation Specific </a></h1>
-                <nav><ul>
-                    <li><a href="/category/code.html">code</a></li>
-                    <li><a href="/category/misc.html">misc</a></li>
-                    <li><a href="/category/teach.html">teach</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Implementation Specific            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/code.html">Code</a>
+                        </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="/category/teach.html">Teach</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/posts/index.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/posts/2014/big-data-at-work.html">Big Data at Work</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2014-07-26T11:26:00">
-                Sat 26 July 2014
-        </abbr>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
 
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/misc.html">misc</a>. </p>
-<p>tags: <a href="/tag/database.html">database</a><a href="/tag/sql.html">sql</a><a href="/tag/big-data.html">big-data</a></p>
-</footer><!-- /.post-info --><h1>Big Data</h1>
+            <article>
+                <h2><a href="/posts/2014/big-data-at-work.html">Big Data at Work</a></h2>
+                <div class="summary"><h1>Big Data</h1>
 <h2>The Situation</h2>
 <p>At work we are concerned about the amount of data that our next project will generate. After
 the system is up with a few thousand customers we are estimating that we could be getting 10GB
-of data per day. This volume of data goes beyond our level of experience, and we are looking
-for new systems to help us deal with it.</p>
-<p>My coworker has been charged with deciding on the database system to use to store the bulk
-of the data that will be coming in. It is all "log" style data: thousands of devices will
-report in and we will store the data for later aggregation. Once the data is reported it becomes
-historical and will not be changed.</p>
-<h2>Hadoop</h2>
-<p>The Hadoop name is very closely associated with the "big data" world and my coworker has spent
-a lot of time diving into it. However, it's a diverse ecosystem and there are many systems
-and subsystems that come into play. Mostly he has focused on the HBase system to organize
-our data in a column-oriented database.</p>
-<p>There have been two major problems with HBase. The first is conceptual. Neither he nor anyone
-else on the team has experience with column-oriented databases. We all have strong backgrounds
-in relational databases with tables and schema. HBase represents a different way of thinking
-and we while we have ideas on how to use it in our project, we don't know if we are making
-good decisions. Additionally, without operational experience, we have had a lot of difficulty
-just getting the system installed and working. There are many vendors and packaged versions
-of Hadoop + HBase with monitoring and management consoles, and they have all given us different
-frustrations with attempting to get them to work. It has been slow going and the project needs
-to move forward.</p>
-<p>The other problem, possibly related to the first, is performance. After HBase has been setup
-and filled with some test data for us to play with, the time to get results is unacceptable.
-Just doing the equivalent of "SELECT * FROM TABLE" took 20 seconds on a system with about 800
-rows. While we are not experts, it's hard to imagine us setting up a system so unoptimized that
-a simple operation could take so long.</p>
-<h2>Other Systems</h2>
-<p>While considering the HBase system he also looked at other NoSQL options. SpliceMachine looked
-promising but is very new and we fear it is not battle tested yet. Other systems had various
-shortcomings in how data is stored or retrieved.</p>
-<p>Apache Cassandra was evaluated briefly but rejected. Cassandra has an "eventual consistency"
-system that my coworker found very suspicious. Also, Cassandra allows for only one column
-family while HBase can have multiple. Personally I feel Cassandra should be given another
-look, but it still brings with it a large learning curve and mental shift to NoSQL ideas.</p>
-<h2>Big Relational</h2>
-<p>Our current front-runner is MySQL in the form of a Galera cluster of MariaDB instances. We
-hope this will allow us to scale our current understanding of databases to deal with the increase
-in data. If we can find a good criteria to shard our data, we will then use Galera to provide
-robustness and high uptime.</p>
-<h2>Never Enough Time</h2>
-<p>The project we are working on has a pretty strict deadline. Our team isn't known for hitting
-deadlines and I worry that we won't have enough time to really vet a database solution. The
-database that we choose will be the backbone of the whole system, so it's very important to get
-it right. Even after meeting with multiple NoSQL vendors like HortonWorks and Cloudera, we still
-do not feel confident using a NoSQL system. However, I'm not convinced that sticking with MySQL
-is a real win either.</p>
-<p>The search continues.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2014/need-better-tools-at-work.html" rel="bookmark"
-                           title="Permalink to Need better tools at work">Need better tools at work</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-06-20T22:22:00">
-                Fri 20 June 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/misc.html">misc</a>. </p>
-<p>tags: <a href="/tag/work.html">work</a><a href="/tag/java.html">java</a></p>
-</footer><!-- /.post-info -->                <h2>Right tool for the job</h2>
+of data per day. This volume of data goes beyond our ...</p>
+                    <a class="btn btn-default btn-xs" href="/posts/2014/big-data-at-work.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/posts/2014/need-better-tools-at-work.html">Need better tools at work</a></h2>
+                <div class="summary"><h2>Right tool for the job</h2>
 <p>At work we really need some better tools. Testing our programs is just not easy when all you have is the program.
 It can take a while to manually put it into the state that you need to test. Currently we do not use any ...</p>
-                <a class="readmore" href="/posts/2014/need-better-tools-at-work.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2014/emacs.html" rel="bookmark"
-                           title="Permalink to Emacs">Emacs</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-05-11T23:01:00">
-                Sun 11 May 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/code.html">code</a>. </p>
-
-</footer><!-- /.post-info -->                <p>I believe I first used emacs back in my community college days. I had access to
+                    <a class="btn btn-default btn-xs" href="/posts/2014/need-better-tools-at-work.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/posts/2014/emacs.html">Emacs</a></h2>
+                <div class="summary"><p>I believe I first used emacs back in my community college days. I had access to
 a Linux machine for a few classes. We often worked in the terminal and I needed
 a good text editor. I have tried vi &amp; vim several times, but I could never get
 used to ...</p>
-                <a class="readmore" href="/posts/2014/emacs.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2014/switching-to-java-at-work.html" rel="bookmark"
-                           title="Permalink to Switching to Java at work">Switching to Java at work</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-05-08T13:37:00">
-                Thu 08 May 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>So at my day job I have always used PHP for back-end work. But I am happy so say that I finally get to expand into Java for
+                    <a class="btn btn-default btn-xs" href="/posts/2014/emacs.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/posts/2014/switching-to-java-at-work.html">Switching to Java at work</a></h2>
+                <div class="summary"><p>So at my day job I have always used PHP for back-end work. But I am happy so say that I finally get to expand into Java for
 some things! I know that Java as a language is not the hottest thing anymore, but I think it is really good ...</p>
-                <a class="readmore" href="/posts/2014/switching-to-java-at-work.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2014/im-a-coder-dojo-mentor.html" rel="bookmark"
-                           title="Permalink to I'm a Coder Dojo Mentor">I'm a Coder Dojo Mentor</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-04-21T16:54:00">
-                Mon 21 April 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/teach.html">teach</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>April 12th Event</h2>
+                    <a class="btn btn-default btn-xs" href="/posts/2014/switching-to-java-at-work.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/posts/2014/im-a-coder-dojo-mentor.html">I'm a Coder Dojo Mentor</a></h2>
+                <div class="summary"><h2>April 12th Event</h2>
 <p>So I was able to get in contact with Mike at the San Francisco Coder Dojo. He is the guy I talked to at the Geeks 4 Good Jam earlier.
 I showed up a little early and found a few people sanding outside the door. I had ...</p>
-                <a class="readmore" href="/posts/2014/im-a-coder-dojo-mentor.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2014/geeks-4-good-jam.html" rel="bookmark"
-                           title="Permalink to Geeks 4 Good jam">Geeks 4 Good jam</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-03-20T18:10:00">
-                Thu 20 March 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <p>So yesterday I went to the Geeks 4 Good Jam. I got an invite on Facebook from an old classmate of mine. I was 
+                    <a class="btn btn-default btn-xs" href="/posts/2014/im-a-coder-dojo-mentor.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/posts/2014/geeks-4-good-jam.html">Geeks 4 Good jam</a></h2>
+                <div class="summary"><p>So yesterday I went to the Geeks 4 Good Jam. I got an invite on Facebook from an old classmate of mine. I was 
 eager to reconnect with her and also get some leads on good projects I could work on. The event was about letting
 developers know of organizations ...</p>
-                <a class="readmore" href="/posts/2014/geeks-4-good-jam.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="/posts/2014/background.html" rel="bookmark"
-                           title="Permalink to Background">Background</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2014-02-22T23:49:00">
-                Sat 22 February 2014
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/misc.html">misc</a>. </p>
-
-</footer><!-- /.post-info -->                <h2>Computers</h2>
+                    <a class="btn btn-default btn-xs" href="/posts/2014/geeks-4-good-jam.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/posts/2014/background.html">Background</a></h2>
+                <div class="summary"><h2>Computers</h2>
 <p>My first computer was a Commodore 64. That was released in 1982, but I wasn't even born yet. I had mine
 in the early 90s. All our stuff came from garage sales or the discount rack back then. We only used the C64 for
 playing games. I remember ...</p>
-                <a class="readmore" href="/posts/2014/background.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://github.com/nickfun/">GitHub</a></li>
-                            <li><a href="http://twitter.com/sevengraff">@sevengraff</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-        </section><!-- /#extras -->
+                    <a class="btn btn-default btn-xs" href="/posts/2014/background.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="http://github.com/nickfun/"><i
+                            class="fa fa-github-square fa-lg"></i> GitHub
+                    </a></li>
+                    <li class="list-group-item"><a href="http://twitter.com/sevengraff"><i
+                            class="fa fa-twitter-square fa-lg"></i> twitter
+                    </a></li>
+                  </ul>
+                </li>
+
+
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/java.html">
+                                java
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/sql.html">
+                                sql
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/big-data.html">
+                                big-data
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/database.html">
+                                database
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/work.html">
+                                work
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Nick Fun
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
 
 </body>
 </html>

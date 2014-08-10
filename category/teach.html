@@ -1,108 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-        <meta charset="utf-8" />
-        <title>Implementation Specific - teach</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+    <title>teach - Implementation Specific</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="website"/>
+            <meta property="og:title" content="Implementation Specific"/>
+            <meta property="og:url" content=""/>
+            <meta property="og:description" content="Implementation Specific"/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/theme/css/custom-nick.css" rel="stylesheet">
+
+
 </head>
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Implementation Specific </a></h1>
-                <nav><ul>
-                    <li><a href="/category/code.html">code</a></li>
-                    <li><a href="/category/misc.html">misc</a></li>
-                    <li class="active"><a href="/category/teach.html">teach</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Implementation Specific            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/code.html">Code</a>
+                        </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
+                        <li class="active">
+                            <a href="/category/teach.html">Teach</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/posts/index.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/posts/2014/im-a-coder-dojo-mentor.html">I'm a Coder Dojo Mentor</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2014-04-21T16:54:00">
-                Mon 21 April 2014
-        </abbr>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
 
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/teach.html">teach</a>. </p>
-
-</footer><!-- /.post-info --><h2>April 12th Event</h2>
+            <article>
+                <h2><a href="/posts/2014/im-a-coder-dojo-mentor.html">I'm a Coder Dojo Mentor</a></h2>
+                <div class="summary"><h2>April 12th Event</h2>
 <p>So I was able to get in contact with Mike at the San Francisco Coder Dojo. He is the guy I talked to at the Geeks 4 Good Jam earlier.
-I showed up a little early and found a few people sanding outside the door. I had hoped that by getting there early I could help 
-with any setup, but no one could enter the space early so I just hung out. Mike was already there too and was trying to get access. 
-The space is the headquarters of GitHub, and there needs to be an employee there to let us in. An employee never showed up, but 
-somehow the head of building security was contacted and a security guard let us into the main room. </p>
-<p>Wow does GitHub have a nice office! Their bar was super impressive. I kinda wish I took a photo. I work a lame corporation, and it 
-really hit that I am missing out on the startup life.</p>
-<p>Anyway, there wasn't anything to setup. The main GitHub room that we use is meant for presentations so there was already tables 
-and chairs out for everyone to use. Mike setup the projection stuff and I shyly introduced myself to the other volunteer mentors. 
-I think there were 8 mentors there? There was about 20 kids I believe. I should have written this earlier, I have such a lame 
-memory. Anyway, there were plenty of mentors there, so I was feeling pretty good. It was my first time doing something like this, 
-so it was good to know that there would be people there that I could ask for help or follow their example as needed. </p>
-<h2>Project: Rock, Paper, Scissors in Javascript</h2>
-<p>Mike lead the event by going to http://code.org and having the kids warm up by solving some programming puzzles there. The site 
-reminds me of the Alice environment that I used for one semester back at Chabot College. Very easy for the kids to use, and there 
-are a lot of Angry Birds images to get them focused.</p>
-<p>Later he brought everyone to http://jsbin.com and started walking everyone through the basics of Javascript and functions.</p>
-<h2>Problems</h2>
-<p>Around here people started to need help. He asked the kids to type out something like this:</p>
-<div class="highlight"><pre><span class="n">var</span> <span class="n">answer</span> <span class="o">=</span> <span class="n">prompt</span><span class="p">(</span><span class="s">&quot;Want to play a game?&quot;</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">answer</span> <span class="o">===</span> <span class="s">&quot;yes&quot;</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s">&quot;lets play!&quot;</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
+I showed up a little early and found a few people sanding outside the door. I had ...</p>
+                    <a class="btn btn-default btn-xs" href="/posts/2014/im-a-coder-dojo-mentor.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="http://github.com/nickfun/"><i
+                            class="fa fa-github-square fa-lg"></i> GitHub
+                    </a></li>
+                    <li class="list-group-item"><a href="http://twitter.com/sevengraff"><i
+                            class="fa fa-twitter-square fa-lg"></i> twitter
+                    </a></li>
+                  </ul>
+                </li>
 
 
-<p>One kid was using an iPad for the day. When he typed "yes" into the prompt, the apple software keyboard was capitalizing the 
-first letter. I was afraid that my explanation of "yes and Yes are different to a computer" would provoke some kind of unhappy 
-response. Instead, for this problem and others, both adults and kids seemed to just accept the situation as-is. Few people 
-seemed frustrated when issues arose. Also long as a mentor came over and helped, everyone seemed pretty happy.</p>
-<h2>Learning Javascript</h2>
-<p>At the end, everyone needed help with the part that uses some nested if-statements to decide if rock or paper or scissors won. For the
-younger kids, I don't think they really understood what was happening in the code. They just wanted to be able to type stuff and see
-something happen. There were a few older kids who seemed to be catching on. I hope those kids continue with coding and make something
-cool! </p>
-<p>One of the kids already had experience with ActionScript. He wrote a function definition that declared a return type, I was impressed.</p>
-<p>We used jsbin.com as the Javascript environment. Everyone got the idea of typing code and running it to see results in the 
-console tab. However, jsbin will insert a closing bracket or parenthesis when you type an opening one and it often lead to 
-problems. At the end, many kids had extra { and ( lying around in their code. It was difficult to explain that this was causing 
-issues. When I instructed the kids to remove or move them around they quickly did as I asked and where happy when their program 
-worked. </p>
-<h2>Conclusion</h2>
-<p>I was very pleased with how the event went! The kids enjoyed their time and I was surprised at how willing they were to follow
-our instructions and attempt the work we gave them. At the end the kids had used up their attention span and were ready to 
-either run around or play minecraft, but two hours of their time was pretty good I think.</p>
-<p>I chatted with Mike at the end and he told me more about the Coder Dojo organization. I seems that right now here is the
-number one guy to organize everything and is looking for help. He also said that often the ratio of kids to mentors is
-not as good as it was today. I plan on going to the next event and I hope I see some of the students there again.</p>                </article>
-            </aside><!-- /#featured -->
-            </ol><!-- /#posts-list -->
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://github.com/nickfun/">GitHub</a></li>
-                            <li><a href="http://twitter.com/sevengraff">@sevengraff</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-        </section><!-- /#extras -->
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/java.html">
+                                java
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/sql.html">
+                                sql
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/big-data.html">
+                                big-data
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/database.html">
+                                database
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/work.html">
+                                work
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Nick Fun
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
 
 </body>
 </html>

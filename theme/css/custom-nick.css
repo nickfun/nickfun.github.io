@@ -1,0 +1,4 @@
+/* Don't re-size tag names based on popularity */
+.tag-1, .tag-2, .tag-3, .tag-4 {
+    font-size: 12pt;
+}

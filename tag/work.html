@@ -1,108 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-        <meta charset="utf-8" />
-        <title>Implementation Specific - work</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+    <title>work - Implementation Specific</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="website"/>
+            <meta property="og:title" content="Implementation Specific"/>
+            <meta property="og:url" content=""/>
+            <meta property="og:description" content="Implementation Specific"/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.yeti.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+        <link href="/theme/css/custom-nick.css" rel="stylesheet">
+
+
 </head>
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Implementation Specific </a></h1>
-                <nav><ul>
-                    <li><a href="/category/code.html">code</a></li>
-                    <li><a href="/category/misc.html">misc</a></li>
-                    <li><a href="/category/teach.html">teach</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Implementation Specific            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li >
+                            <a href="/category/code.html">Code</a>
+                        </li>
+                        <li >
+                            <a href="/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="/category/teach.html">Teach</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/posts/index.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/posts/2014/need-better-tools-at-work.html">Need better tools at work</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2014-06-20T22:22:00">
-                Fri 20 June 2014
-        </abbr>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
 
-        <address class="vcard author">
-                By <a class="url fn" href="/author/nick-fun.html">Nick Fun</a>
-        </address>
-<p>In <a href="/category/misc.html">misc</a>. </p>
-<p>tags: <a href="/tag/work.html">work</a><a href="/tag/java.html">java</a></p>
-</footer><!-- /.post-info --><h2>Right tool for the job</h2>
+            <article>
+                <h2><a href="/posts/2014/need-better-tools-at-work.html">Need better tools at work</a></h2>
+                <div class="summary"><h2>Right tool for the job</h2>
 <p>At work we really need some better tools. Testing our programs is just not easy when all you have is the program.
-It can take a while to manually put it into the state that you need to test. Currently we do not use any automated
-systems for testing. The only exception is a small tool that I wrote.</p>
-<h2>Existing tooling</h2>
-<p>Right now the only tool we have at our disposal is a crummy PHP app I wrote that runs on the command line.
-I use it to simulate vehicles being in trip so that I can test the big map page and ensure that it draws
-vehicles moving around correctly. I remember a co-worker of mine saying he would often have to test the map
-page at 5pm when everyone was driving home. I knew that was not a good solution to testing stuff, so I wrote
-a simple thing to manipulate the database in a way that simulates vehicles driving around. It has come in 
-handy <em>so many</em> times. Back when I was doing full-time development on the big map page I was using it all day
-every day for weeks at a time. </p>
-<p>My only regret about the trip faker tool is that I never pushed to get the others to use it. I should have 
-written up a document and sent it around. However, I am the lead dev for that, so even if others knew
-how it worked it would still be mostly me using it. Also, it's usage is not very intuitive so I doubt the
-rest of the team would be thrilled to learn it's quirks. That is a lesson for me when I make the next tool. :)</p>
-<h2>Future Tools</h2>
-<p>I have built a few small things that need to be expanded into more usable tools:</p>
-<h3>Report Stress Tester</h3>
-<p>This is a little PHP page that generates a lot of requests for reports to be generated. I like that it fully 
-simulates how a report would be requested. However, it exists in a page in my folder on the dev server and
-will never be pushed to the DEV or LIVE environment. I will need to integrate it into a admin page if I want
-others to even consider using it. Also, it generates a lot of data, it would be a good idea to have a way
-to clean up all the stress reports it created.</p>
-<h3>Device Network Simulator</h3>
-<p>We have hardware simulators that pretend to be a car engine that present a OBDII port. However, they do not let us
-fake data such as GPS location, timestamps, and other events. Plus they often do not get good cell reception
-in our part of the building.</p>
-<p>So I built a simple (too simple) Java app that reads a input file and sends the data over the network to the 
-back-end service to simulate network traffic from a device. The input file must contain everything <em>exactly</em> as you
-want it to be sent. I need to upgrade this to take care of things like </p>
-<ul>
-<li>Timestamps</li>
-<li>GPS in normal lat/lng format instead of raw hex</li>
-<li>increment sequence numbers</li>
-</ul>
-<p>I hope to build a simple GUI with it that can give some graphical feedback as it processes the file
-and sends the data. This would be really, really helpful when developing the back-end service. Currently the boss
-just uses the hardware simulator when he developers, but as I said there are many limits to that way. Additionally,
-when the QA team needs to test something specific, the hardware simulator usually can't reproduce a scenario exactly.</p>
-<h2>Future Tools</h2>
-<p>The biggest tools we need are already out there ready for us to use. Our main web app has no automated tests
-and there are many products that can be applied. We have looked at Selenium and Jazz Automation. The team really
-needs to set some time aside and decide which tool will work for us and get it into our workflow. Until we do,
-we are spending a lot of time doing things manually that could be automated. I really want automated tests so that
-we can catch bugs! It's really frustrating going to a page and finding that something is broken that used to work. 
-Annoying!!</p>
-<p>We will soon be working on a weather project. I will keep my eyes open for tools to develop that can help us 
-build and test the new system.</p>                </article>
-            </aside><!-- /#featured -->
-            </ol><!-- /#posts-list -->
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://github.com/nickfun/">GitHub</a></li>
-                            <li><a href="http://twitter.com/sevengraff">@sevengraff</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-        </section><!-- /#extras -->
+It can take a while to manually put it into the state that you need to test. Currently we do not use any ...</p>
+                    <a class="btn btn-default btn-xs" href="/posts/2014/need-better-tools-at-work.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="http://github.com/nickfun/"><i
+                            class="fa fa-github-square fa-lg"></i> GitHub
+                    </a></li>
+                    <li class="list-group-item"><a href="http://twitter.com/sevengraff"><i
+                            class="fa fa-twitter-square fa-lg"></i> twitter
+                    </a></li>
+                  </ul>
+                </li>
+
+
+
+                <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/java.html">
+                                java
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/sql.html">
+                                sql
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/big-data.html">
+                                big-data
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/database.html">
+                                database
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="/tag/work.html">
+                                work
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Nick Fun
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
 
 </body>
 </html>
