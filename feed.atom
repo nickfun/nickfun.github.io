@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Implementation Specific</title><link href="http://nickfun.github.io/" rel="alternate"></link><link href="http://nickfun.github.io/feed.atom" rel="self"></link><id>http://nickfun.github.io/</id><updated>2014-08-10T15:32:00-07:00</updated><entry><title>Pelican Config</title><link href="http://nickfun.github.io/posts/2014/pelican-config.html" rel="alternate"></link><updated>2014-08-10T15:32:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:nickfun.github.io,2014-08-10:posts/2014/pelican-config.html</id><summary type="html">&lt;h2&gt;Pelican Static Site Generator&lt;/h2&gt;
+&lt;p&gt;I'm using &lt;a href="http://www.getpelican.com"&gt;Pelican&lt;/a&gt; to build this site. It's pretty great and I'd like to share the
+config that I am using for it.&lt;/p&gt;
+&lt;p&gt;My &lt;a href="https://gist.github.com/nickfun/d58cb72e507ac02ffcc2"&gt;pelicanconf.py config file&lt;/a&gt; is hosted as a gist.&lt;/p&gt;
+&lt;p&gt;Pelican comes with some great defaults, I have not had to make many changes.
+Most changes are for how the markdown posts are renamed when generated to html.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;ARTICLE_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;posts/{date:%Y}/{slug}.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;ARTICLE_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;posts/{date:%Y}/{slug}.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;ARCHIVES_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;posts/index.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;YEAR_ARCHIVE_SAVE_AS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#39;posts/{date:%Y}/index.html&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;ARCHIVES_URL&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;posts/index.html&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;With the above config, a post I made on July 17, 2013 with a title of "first post" will be saved to /posts/2013/first-post.html and it will have the same URL. The yearly archive is /posts/2013/index.html. This is nice because when reading the article anyone can just delete the post title from the URL and get the archive for the year. I do not write enough to worry about breaking the yearly archive into monthly archives.&lt;/p&gt;
+&lt;p&gt;The template that I use, &lt;a href="https://github.com/DandyDev/pelican-bootstrap3"&gt;pelican-bootstrap3&lt;/a&gt;, defaults the archive URL to &lt;code&gt;archive.html&lt;/code&gt;, so I have to override it with the &lt;code&gt;ARCHIVES_URL&lt;/code&gt; variable.&lt;/p&gt;
+&lt;p&gt;It's interesting to me that I have to config both the URL and the SAVE_AS path for an article. On a static site these will always be the same thing. Whats the advantage to configuring these separately?&lt;/p&gt;
+&lt;p&gt;A great thing about the pelican-bootstrap3 theme is that it comes with many
+sub-themes that can be toggled with the &lt;code&gt;BOOTSTRAP_THEME&lt;/code&gt; variable. &lt;/p&gt;
+&lt;p&gt;I've really enjoyed using pelican to generate this site. If I had to maintain
+another site I would definitely start with pelican and see if I could get
+away with using it. A static site is a great way to publish information and
+can be very cheaply hosted on S3.&lt;/p&gt;</summary><category term="python"></category></entry><entry><title>Big Data at Work</title><link href="http://nickfun.github.io/posts/2014/big-data-at-work.html" rel="alternate"></link><updated>2014-07-26T11:26:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:nickfun.github.io,2014-07-26:posts/2014/big-data-at-work.html</id><summary type="html">&lt;h2&gt;The Situation&lt;/h2&gt;
+&lt;p&gt;At work we are concerned about the amount of data that our next project will generate. After
+the system is up with a few thousand customers we are estimating that we could be getting 10GB
+of data per day. This volume of data goes beyond our level of experience, and we are looking
+for new systems to help us deal with it.&lt;/p&gt;
+&lt;p&gt;My coworker has been charged with deciding on the database system to use to store the bulk
+of the data that will be coming in. It is all "log" style data: thousands of devices will
+report in and we will store the data for later aggregation. Once the data is reported it becomes
+historical and will not be changed.&lt;/p&gt;
+&lt;h2&gt;Hadoop&lt;/h2&gt;
+&lt;p&gt;The Hadoop name is very closely associated with the "big data" world and my coworker has spent
+a lot of time diving into it. However, it's a diverse ecosystem and there are many systems
+and subsystems that come into play. Mostly he has focused on the HBase system to organize
+our data in a column-oriented database.&lt;/p&gt;
+&lt;p&gt;There have been two major problems with HBase. The first is conceptual. Neither he nor anyone
+else on the team has experience with column-oriented databases. We all have strong backgrounds
+in relational databases with tables and schema. HBase represents a different way of thinking
+and we while we have ideas on how to use it in our project, we don't know if we are making
+good decisions. Additionally, without operational experience, we have had a lot of difficulty
+just getting the system installed and working. There are many vendors and packaged versions
+of Hadoop + HBase with monitoring and management consoles, and they have all given us different
+frustrations with attempting to get them to work. It has been slow going and the project needs
+to move forward.&lt;/p&gt;
+&lt;p&gt;The other problem, possibly related to the first, is performance. After HBase has been setup
+and filled with some test data for us to play with, the time to get results is unacceptable.
+Just doing the equivalent of "SELECT * FROM TABLE" took 20 seconds on a system with about 800
+rows. While we are not experts, it's hard to imagine us setting up a system so unoptimized that
+a simple operation could take so long.&lt;/p&gt;
+&lt;h2&gt;Other Systems&lt;/h2&gt;
+&lt;p&gt;While considering the HBase system he also looked at other NoSQL options. SpliceMachine looked
+promising but is very new and we fear it is not battle tested yet. Other systems had various
+shortcomings in how data is stored or retrieved.&lt;/p&gt;
+&lt;p&gt;Apache Cassandra was evaluated briefly but rejected. Cassandra has an "eventual consistency"
+system that my coworker found very suspicious. Also, Cassandra allows for only one column
+family while HBase can have multiple. Personally I feel Cassandra should be given another
+look, but it still brings with it a large learning curve and mental shift to NoSQL ideas.&lt;/p&gt;
+&lt;h2&gt;Big Relational&lt;/h2&gt;
+&lt;p&gt;Our current front-runner is MySQL in the form of a Galera cluster of MariaDB instances. We
+hope this will allow us to scale our current understanding of databases to deal with the increase
+in data. If we can find a good criteria to shard our data, we will then use Galera to provide
+robustness and high uptime.&lt;/p&gt;
+&lt;h2&gt;Never Enough Time&lt;/h2&gt;
+&lt;p&gt;The project we are working on has a pretty strict deadline. Our team isn't known for hitting
+deadlines and I worry that we won't have enough time to really vet a database solution. The
+database that we choose will be the backbone of the whole system, so it's very important to get
+it right. Even after meeting with multiple NoSQL vendors like HortonWorks and Cloudera, we still
+do not feel confident using a NoSQL system. However, I'm not convinced that sticking with MySQL
+is a real win either.&lt;/p&gt;
+&lt;p&gt;The search continues.&lt;/p&gt;</summary><category term="database"></category><category term="sql"></category><category term="big-data"></category></entry><entry><title>Need better tools at work</title><link href="http://nickfun.github.io/posts/2014/need-better-tools-at-work.html" rel="alternate"></link><updated>2014-06-20T22:22:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:nickfun.github.io,2014-06-20:posts/2014/need-better-tools-at-work.html</id><summary type="html">&lt;h2&gt;Right tool for the job&lt;/h2&gt;
+&lt;p&gt;At work we really need some better tools. Testing our programs is just not easy when all you have is the program.
+It can take a while to manually put it into the state that you need to test. Currently we do not use any automated
+systems for testing. The only exception is a small tool that I wrote.&lt;/p&gt;
+&lt;h2&gt;Existing tooling&lt;/h2&gt;
+&lt;p&gt;Right now the only tool we have at our disposal is a crummy PHP app I wrote that runs on the command line.
+I use it to simulate vehicles being in trip so that I can test the big map page and ensure that it draws
+vehicles moving around correctly. I remember a co-worker of mine saying he would often have to test the map
+page at 5pm when everyone was driving home. I knew that was not a good solution to testing stuff, so I wrote
+a simple thing to manipulate the database in a way that simulates vehicles driving around. It has come in 
+handy &lt;em&gt;so many&lt;/em&gt; times. Back when I was doing full-time development on the big map page I was using it all day
+every day for weeks at a time. &lt;/p&gt;
+&lt;p&gt;My only regret about the trip faker tool is that I never pushed to get the others to use it. I should have 
+written up a document and sent it around. However, I am the lead dev for that, so even if others knew
+how it worked it would still be mostly me using it. Also, it's usage is not very intuitive so I doubt the
+rest of the team would be thrilled to learn it's quirks. That is a lesson for me when I make the next tool. :)&lt;/p&gt;
+&lt;h2&gt;Future Tools&lt;/h2&gt;
+&lt;p&gt;I have built a few small things that need to be expanded into more usable tools:&lt;/p&gt;
+&lt;h3&gt;Report Stress Tester&lt;/h3&gt;
+&lt;p&gt;This is a little PHP page that generates a lot of requests for reports to be generated. I like that it fully 
+simulates how a report would be requested. However, it exists in a page in my folder on the dev server and
+will never be pushed to the DEV or LIVE environment. I will need to integrate it into a admin page if I want
+others to even consider using it. Also, it generates a lot of data, it would be a good idea to have a way
+to clean up all the stress reports it created.&lt;/p&gt;
+&lt;h3&gt;Device Network Simulator&lt;/h3&gt;
+&lt;p&gt;We have hardware simulators that pretend to be a car engine that present a OBDII port. However, they do not let us
+fake data such as GPS location, timestamps, and other events. Plus they often do not get good cell reception
+in our part of the building.&lt;/p&gt;
+&lt;p&gt;So I built a simple (too simple) Java app that reads a input file and sends the data over the network to the 
+back-end service to simulate network traffic from a device. The input file must contain everything &lt;em&gt;exactly&lt;/em&gt; as you
+want it to be sent. I need to upgrade this to take care of things like &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Timestamps&lt;/li&gt;
+&lt;li&gt;GPS in normal lat/lng format instead of raw hex&lt;/li&gt;
+&lt;li&gt;increment sequence numbers&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I hope to build a simple GUI with it that can give some graphical feedback as it processes the file
+and sends the data. This would be really, really helpful when developing the back-end service. Currently the boss
+just uses the hardware simulator when he developers, but as I said there are many limits to that way. Additionally,
+when the QA team needs to test something specific, the hardware simulator usually can't reproduce a scenario exactly.&lt;/p&gt;
+&lt;h2&gt;Future Tools&lt;/h2&gt;
+&lt;p&gt;The biggest tools we need are already out there ready for us to use. Our main web app has no automated tests
+and there are many products that can be applied. We have looked at Selenium and Jazz Automation. The team really
+needs to set some time aside and decide which tool will work for us and get it into our workflow. Until we do,
+we are spending a lot of time doing things manually that could be automated. I really want automated tests so that
+we can catch bugs! It's really frustrating going to a page and finding that something is broken that used to work. 
+Annoying!!&lt;/p&gt;
+&lt;p&gt;We will soon be working on a weather project. I will keep my eyes open for tools to develop that can help us 
+build and test the new system.&lt;/p&gt;</summary><category term="work"></category><category term="java"></category></entry><entry><title>Emacs</title><link href="http://nickfun.github.io/posts/2014/emacs.html" rel="alternate"></link><updated>2014-05-11T23:01:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:nickfun.github.io,2014-05-11:posts/2014/emacs.html</id><summary type="html">&lt;p&gt;I believe I first used emacs back in my community college days. I had access to
+a Linux machine for a few classes. We often worked in the terminal and I needed
+a good text editor. I have tried vi &amp;amp; vim several times, but I could never get
+used to the idea of several modes. I would often switch to a different mode
+unexpectedly and things would get really bad. I never had &lt;em&gt;that&lt;/em&gt; problem with
+emacs, so I would usually use emacs.&lt;/p&gt;
+&lt;p&gt;Eventually, I tried diving in to emacs to see what I could get it to do. I knew
+it had a reputation for extensions and while I wasn't planning on writing my own
+I wanted to take advantage of anything that was out there. While reading some
+docs I found out how to split the window and view two files at the same time.
+That was when I decided to never even try vim again and to stay away from nano/pico.&lt;/p&gt;
+&lt;p&gt;My decision was justified once I learned about org-mode.&lt;/p&gt;
+&lt;p&gt;At work I have been using Org-mode to keep track of my time. Our bug tracker, Redmine,
+lets you log time for how long a bug takes. The boss has asked us to submit a time with
+bugs that we close. Org-mode makes it wicked easy to add task, clock in, and generate
+a report when needed. I've got a giant file that I've been keeping since the beginning
+of the year, 5 months ago. I should look into how to split it into different files.&lt;/p&gt;
+&lt;h2&gt;Time to go all in&lt;/h2&gt;
+&lt;p&gt;The other day I saw the "Emacs Rocks" video that showed multiple-cursors mode. I knew then
+that it was time to go all-in with emacs. Sublime text has been my main code editor
+since at least 2011. I have become very productive in it because of its built-in multi 
+cursor support. I had never used a system like that before and it was easy to see
+how I could use it to speed up dealing with code in patterns. &lt;/p&gt;
+&lt;p&gt;I haven't yet taken the time to setup multiple-cursors mode, but I am investing more in 
+emacs. I have it setup on my personal computers now. I setup the marmalade repo to 
+easily install plug-ins. I have chosen a theme to run with (zenburn) and will try
+to move myself into a emacs way of life.&lt;/p&gt;
+&lt;h2&gt;Emacs Lisp&lt;/h2&gt;
+&lt;p&gt;I have always wanted to learn Lisp or Scheme. In my Programming Language Concepts class
+in University we were given an intro to Scheme. I was pretty blown away by how different
+the language was to everything else I had used at that point. I was a pretty good
+programmer, but I had trouble wrapping my mind around Scheme. I have wanted to spend
+more time with it ever since, and I've never really been able to take it on.&lt;/p&gt;
+&lt;p&gt;Emacs is famous for having its own Lisp built in: elisp. Sadly, the language is really
+old and it has not evolved along with other languages. I understand the variable scope
+system is weird in elisp and it has bad support for namespaces. However, I still want
+to learn it. It will be profitable for me to learn to extend emacs, and I fill finally
+get to learn a lisp! I'm rather excited.&lt;/p&gt;
+&lt;p&gt;There is a "Intro to elisp" manual that GNU published a few years ago that they give
+away for free. I am slowly working through it. I keep a "stuff" repo on GitHub that
+I use for experiments. My plan now is that all my experiments will be Emacs oriented.&lt;/p&gt;</summary></entry><entry><title>Switching to Java at work</title><link href="http://nickfun.github.io/posts/2014/switching-to-java-at-work.html" rel="alternate"></link><updated>2014-05-08T13:37:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:nickfun.github.io,2014-05-08:posts/2014/switching-to-java-at-work.html</id><summary type="html">&lt;p&gt;So at my day job I have always used PHP for back-end work. But I am happy so say that I finally get to expand into Java for
+some things! I know that Java as a language is not the hottest thing anymore, but I think it is really good for me to
+move away from PHP.&lt;/p&gt;
+&lt;h2&gt;Transition away&lt;/h2&gt;
+&lt;p&gt;We already have a network server written in Java: the "ATP Client" and now we are expanding to at least one more Java
+system and maybe another. My coworker and I are building a reporting system in Java. It is rather boring and complex
+but I'm happy to be moving into a "real" language because PHP just can't deal with the things we want to do.&lt;/p&gt;
+&lt;p&gt;PHP is the worst environment to do background processing. We want Reports and a few other things to run in the background,
+so we have to bring in something better. Pretty much everything is better than PHP.&lt;/p&gt;
+&lt;h2&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;I'm glad that we are introducing more Java into the project. Currently, the report server runs inside Tomcat so that
+we can communicate with it over HTTP. There is talk of bringing in RabbitMQ, and I really hope it happens. Then we can
+drop Tomcat and just communicate with the report server on the message queue. That will be cleaner, I think.&lt;/p&gt;
+&lt;p&gt;Eventually I think we will have to re-write all of the web back-end, and I hope we get to do that in a language other
+than PHP also. I think Groovy or Python would be a great fit for us. We can keep coding without worrying about types
+or defining our data structures with classes, and we will have better access to background processing.&lt;/p&gt;
+&lt;h2&gt;Dev notes&lt;/h2&gt;
+&lt;p&gt;We are using Netbeans to develop or new java code. The boss, who wrote the current Java network server, doesn't use a 
+full IDE for development. He uses UEEditor I think. It's like a super-powered version of Notepad++. I like Netbeans a lot
+and it has been pretty smooth. I love that now I can setup unit tests and easily run them. &lt;/p&gt;</summary></entry><entry><title>I'm a Coder Dojo Mentor</title><link href="http://nickfun.github.io/posts/2014/im-a-coder-dojo-mentor.html" rel="alternate"></link><updated>2014-04-21T16:54:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:nickfun.github.io,2014-04-21:posts/2014/im-a-coder-dojo-mentor.html</id><summary type="html">&lt;h2&gt;April 12th Event&lt;/h2&gt;
+&lt;p&gt;So I was able to get in contact with Mike at the San Francisco Coder Dojo. He is the guy I talked to at the Geeks 4 Good Jam earlier.
+I showed up a little early and found a few people sanding outside the door. I had hoped that by getting there early I could help 
+with any setup, but no one could enter the space early so I just hung out. Mike was already there too and was trying to get access. 
+The space is the headquarters of GitHub, and there needs to be an employee there to let us in. An employee never showed up, but 
+somehow the head of building security was contacted and a security guard let us into the main room. &lt;/p&gt;
+&lt;p&gt;Wow does GitHub have a nice office! Their bar was super impressive. I kinda wish I took a photo. I work a lame corporation, and it 
+really hit that I am missing out on the startup life.&lt;/p&gt;
+&lt;p&gt;Anyway, there wasn't anything to setup. The main GitHub room that we use is meant for presentations so there was already tables 
+and chairs out for everyone to use. Mike setup the projection stuff and I shyly introduced myself to the other volunteer mentors. 
+I think there were 8 mentors there? There was about 20 kids I believe. I should have written this earlier, I have such a lame 
+memory. Anyway, there were plenty of mentors there, so I was feeling pretty good. It was my first time doing something like this, 
+so it was good to know that there would be people there that I could ask for help or follow their example as needed. &lt;/p&gt;
+&lt;h2&gt;Project: Rock, Paper, Scissors in Javascript&lt;/h2&gt;
+&lt;p&gt;Mike lead the event by going to http://code.org and having the kids warm up by solving some programming puzzles there. The site 
+reminds me of the Alice environment that I used for one semester back at Chabot College. Very easy for the kids to use, and there 
+are a lot of Angry Birds images to get them focused.&lt;/p&gt;
+&lt;p&gt;Later he brought everyone to http://jsbin.com and started walking everyone through the basics of Javascript and functions.&lt;/p&gt;
+&lt;h2&gt;Problems&lt;/h2&gt;
+&lt;p&gt;Around here people started to need help. He asked the kids to type out something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;var&lt;/span&gt; &lt;span class="n"&gt;answer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;prompt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Want to play a game?&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;answer&lt;/span&gt; &lt;span class="o"&gt;===&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;yes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="n"&gt;console&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;lets play!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;One kid was using an iPad for the day. When he typed "yes" into the prompt, the apple software keyboard was capitalizing the 
+first letter. I was afraid that my explanation of "yes and Yes are different to a computer" would provoke some kind of unhappy 
+response. Instead, for this problem and others, both adults and kids seemed to just accept the situation as-is. Few people 
+seemed frustrated when issues arose. Also long as a mentor came over and helped, everyone seemed pretty happy.&lt;/p&gt;
+&lt;h2&gt;Learning Javascript&lt;/h2&gt;
+&lt;p&gt;At the end, everyone needed help with the part that uses some nested if-statements to decide if rock or paper or scissors won. For the
+younger kids, I don't think they really understood what was happening in the code. They just wanted to be able to type stuff and see
+something happen. There were a few older kids who seemed to be catching on. I hope those kids continue with coding and make something
+cool! &lt;/p&gt;
+&lt;p&gt;One of the kids already had experience with ActionScript. He wrote a function definition that declared a return type, I was impressed.&lt;/p&gt;
+&lt;p&gt;We used jsbin.com as the Javascript environment. Everyone got the idea of typing code and running it to see results in the 
+console tab. However, jsbin will insert a closing bracket or parenthesis when you type an opening one and it often lead to 
+problems. At the end, many kids had extra { and ( lying around in their code. It was difficult to explain that this was causing 
+issues. When I instructed the kids to remove or move them around they quickly did as I asked and where happy when their program 
+worked. &lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I was very pleased with how the event went! The kids enjoyed their time and I was surprised at how willing they were to follow
+our instructions and attempt the work we gave them. At the end the kids had used up their attention span and were ready to 
+either run around or play minecraft, but two hours of their time was pretty good I think.&lt;/p&gt;
+&lt;p&gt;I chatted with Mike at the end and he told me more about the Coder Dojo organization. I seems that right now here is the
+number one guy to organize everything and is looking for help. He also said that often the ratio of kids to mentors is
+not as good as it was today. I plan on going to the next event and I hope I see some of the students there again.&lt;/p&gt;</summary></entry><entry><title>Geeks 4 Good jam</title><link href="http://nickfun.github.io/posts/2014/geeks-4-good-jam.html" rel="alternate"></link><updated>2014-03-20T18:10:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:nickfun.github.io,2014-03-20:posts/2014/geeks-4-good-jam.html</id><summary type="html">&lt;p&gt;So yesterday I went to the Geeks 4 Good Jam. I got an invite on Facebook from an old classmate of mine. I was 
+eager to reconnect with her and also get some leads on good projects I could work on. The event was about letting
+developers know of organizations that can use tech help to do good things. I am an Eagle Scout, so doing volunteer work is
+something that I am used to, and I am sad to say that I have not been doing any lately. This seemed like a great
+opportunity for me.&lt;/p&gt;
+&lt;h2&gt;Presentations&lt;/h2&gt;
+&lt;p&gt;I arrived a bit late and missed the first speaker. He was talking about working at a hospital, or doing something
+in the health care industry? I don't know. He had a link on his slides to &lt;a href="http://github.com/hy"&gt;github&lt;/a&gt; but I went
+there and didn't see any information about an organization. Not clear how I could help.&lt;/p&gt;
+&lt;p&gt;Other presenters were ChickTech, Coder Dojo, Social Coding 4 good, SF Public Press, and Coders For America (?). They all
+seemed really cool. I don't know if I could really contribute to ChickTech since they focus on high school girls. Could I
+really make a difference, as a guy, if I mentored a young girl? It seemed that they got the most out of having adult females
+give advice to the girls. The other orgs seemed interesting, but had vague goals and it wasn't clear if I could &lt;em&gt;really&lt;/em&gt; help out.&lt;/p&gt;
+&lt;h2&gt;Outcome&lt;/h2&gt;
+&lt;p&gt;I chatted with the guy from Coder Dojo about their "mentor" system. At Coder Dojo, a mentor is mostly just an experienced 
+developer who can help kids with projects and lessons that are planned out by a teacher. It seems that any mentor can become
+a teacher after a short while, so there is no big process around it. After talking to him, it seemed like the kind of thing that
+is within my abilities and could also do some good. I gave the guy my name and email but he has not contacted me yet. If I don't
+hear from him in a while I initiate contact on my own.&lt;/p&gt;
+&lt;p&gt;I also talked to the lady from Social Coding 4 Good. At first I was skeptical that their service was just a CraigsList for 
+free programmers. But she gave me a lot of details and I got the feeling that she personally knows the organizations and 
+projects that they promote on the site. I have not yet signed up there but I plan to. It seems that only about 10% of the
+people who sign up ever get around to working on a project, but hey I could be one of those 10%!&lt;/p&gt;
+&lt;p&gt;I didn't have much time to talk to the person who invited me. I was surprised that she was one of the organizers of the Jam, 
+not just passing along invitations on Facebook! We gave vague statements to seeing each other again, I hope we do.&lt;/p&gt;</summary></entry><entry><title>Background</title><link href="http://nickfun.github.io/posts/2014/background.html" rel="alternate"></link><updated>2014-02-22T23:49:00-08:00</updated><author><name>Nick Fun</name></author><id>tag:nickfun.github.io,2014-02-22:posts/2014/background.html</id><summary type="html">&lt;h2&gt;Computers&lt;/h2&gt;
+&lt;p&gt;My first computer was a Commodore 64. That was released in 1982, but I wasn't even born yet. I had mine
+in the early 90s. All our stuff came from garage sales or the discount rack back then. We only used the C64 for
+playing games. I remember really enjoying &lt;em&gt;Blue Max&lt;/em&gt; and &lt;em&gt;Archon&lt;/em&gt;. Eventually we got a Windows 95 machine
+that we used for schoolwork and games. Mostly Starcraft and doom clones.&lt;/p&gt;
+&lt;h2&gt;Programming&lt;/h2&gt;
+&lt;p&gt;I learned HTML from a website that was called &lt;em&gt;HTML Goodies&lt;/em&gt;. It might still be out there. I learned HTML4
+and very little CSS. I wasn't really interested in CSS, I've never had success making designs. &lt;/p&gt;
+&lt;p&gt;PHP I also learned on my own buy just reading up various tutorials on the web and spending a lot of time
+in the docs section of php.net. Same for MySQL. I wrote some amateur code back in the day, but I think that
+these days I write "good" PHP, or about as good as PHP can get.&lt;/p&gt;
+&lt;p&gt;I made some simple stuff, made a few complex things. In my early days I was most proud of a phpMyAdmin-like
+app that worked on a flat-file database called TextDB. And, of course, &lt;em&gt;NewLife Blogger&lt;/em&gt;. I'll have to dedicate
+a whole page to that one day. It's worth it.&lt;/p&gt;
+&lt;p&gt;Eventually, I signed up for a real programming class. I remember Keith Mehl's Intro to C++ class. It was amazing.
+The teacher knew everything and had a million stories of being a coder at a real company. I haven't regretted 
+becoming a software engineer.&lt;/p&gt;
+&lt;p&gt;I'm trying to make a transition from a PHP dev to a Java dev. Hopefully it all works out for the best!&lt;/p&gt;</summary></entry></feed>
