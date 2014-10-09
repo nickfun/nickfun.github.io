@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>Freemarker template inheritance - Implementation Specific</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Pelican static site generator">
+    
+
+    <!-- Open Graph tags -->
+            <meta property="og:type" content="article"/>
+            <meta property="og:title" content="Freemarker template inheritance"/>
+            <meta property="og:url" content="//nickfun.github.io/posts/2014/freemarker-template-inheritance.html"/>
+            <meta property="og:description" content="Template systems like Twig in PHP and Jinja in Python allow for templates to inherit from a base template. In Freemarker you can do something similar but you have to set it up yourself using the macro system. At work we are using Freemarker with Dropwizard. I was familiar with ..."/>
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="//nickfun.github.io/theme/css/bootstrap.united.min.css" type="text/css"/>
+    <link href="//nickfun.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="//nickfun.github.io/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="//nickfun.github.io/theme/css/style.css" type="text/css"/>
+        <link href="//nickfun.github.io/theme/css/custom-nick.css" rel="stylesheet">
+
+        <link href="//nickfun.github.io/feed.atom" type="application/atom+xml" rel="alternate"
+              title="Implementation Specific ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="//nickfun.github.io/" class="navbar-brand">
+Implementation Specific            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="//nickfun.github.io/category/code.html">Code</a>
+                        </li>
+                        <li >
+                            <a href="//nickfun.github.io/category/misc.html">Misc</a>
+                        </li>
+                        <li >
+                            <a href="//nickfun.github.io/category/teach.html">Teach</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="//nickfun.github.io/posts/index.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="//nickfun.github.io/posts/2014/freemarker-template-inheritance.html"
+                       rel="bookmark"
+                       title="Permalink to Freemarker template inheritance">
+                        Freemarker template inheritance
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2014-10-09T15:04:00"> Thu 09 October 2014</time>
+    </span>
+    <span class="label">By</span>
+    <a href="//nickfun.github.io/"><i class="fa fa-user"></i> Nick Fun</a>
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="//nickfun.github.io/tag/java.html">java</a>
+        /
+	<a href="//nickfun.github.io/tag/web.html">web</a>
+        /
+	<a href="//nickfun.github.io/tag/dropwizard.html">dropwizard</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Template systems like Twig in PHP and Jinja in Python allow for templates to inherit from a base template. In Freemarker you can do something similar but you have to set it up yourself using the macro system. At work we are using <a href="http://freemarker.org/">Freemarker</a> with <a href="http://www.dropwizard.io/">Dropwizard</a>. I was familiar with Twig and was hoping that we can get a simliar inheritance system in Freemarker. It's not in the docs, but it is possible to have the feature.</p>
+<p>Freemarker lets you do some neat stuff. You can have a "base" template that defines the overall page structure, and then the actual template you want to write can just fill in the pieces. Here is how that will look:</p>
+<div class="highlight"><pre><span class="nx">base.ftl</span><span class="p">:</span>
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">page_head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">title</span><span class="o">&gt;</span><span class="nx">Page</span> <span class="nb">title</span><span class="o">!&lt;/</span><span class="nb">title</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="k">link</span> <span class="n">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/css/default.css&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">page_body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Basic</span> <span class="nx">Page</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">This</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nb">body</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">page</span><span class="o">!&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">display_page</span><span class="o">&gt;</span>
+  <span class="o">&lt;!</span><span class="nb">doctype</span> <span class="nx">html</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">head</span><span class="o">&gt;</span> 
+      <span class="o">&lt;</span><span class="p">@</span><span class="nx">page_head</span><span class="o">/&gt;</span> 
+      <span class="o">&lt;</span><span class="nb">script</span> <span class="k">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/js/tracking.js&quot;</span><span class="o">&gt;&lt;/</span><span class="nb">script</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nb">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">body</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nb">div</span> <span class="n">id</span><span class="o">=</span><span class="s2">&quot;nav&quot;</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="o">&gt;</span><span class="nb">Home</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nb">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="p">@</span><span class="nx">page_body</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="nb">body</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="nx">user.ftl</span><span class="p">:</span>
+<span class="o">&lt;</span><span class="vi">#include</span> <span class="s2">&quot;base.ftl&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">page_head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">title</span><span class="o">&gt;</span><span class="nb">User</span> <span class="nx">page</span><span class="o">&lt;/</span><span class="nb">title</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">script</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/js/user.min.js&quot;</span><span class="o">&gt;&lt;/</span><span class="nb">script</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">page_body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nb">User</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">The</span> <span class="nb">user</span> <span class="nx">page</span><span class="o">!&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="p">@</span><span class="nx">display_page</span><span class="o">/&gt;</span>
+</pre></div>
+
+
+<p>Freemarker provides a powerful macro system that allows us to implement template inheritance. In base.ftl we define a few macros for the head and body of the page. Then we define the <code>display_page</code> macro to wrap the head and body. In <code>display_page</code> we get to define the basic structure of the page and include common things, like a user tracking code or page navigation. Templates can define what goes in the head and body by extending the base file, define their own macro named <code>page_head</code>, <code>page_body</code>, this overrides the macros defined in base.tpl, then call the wrapping macro <code>display_page</code>. There can be more than one base template, and different page templates can include the one that works best for them. So we could have a <code>public_base.ftl</code> and a <code>admin_base.ftl</code> that define different wrappers but the individual templates still define their own head, body, etc.</p>
+<p>In other template systems you are provided a <code>parent</code> or <code>extends</code> method along with <code>block</code> tags to build up this kind of structure. In Freemarker it is still possible but you have to jump through the hoop of setting up macros to do it for you.</p>
+<h2>Default Values</h2>
+<p>In the above example, <code>user.ftl</code> redefines the <code>page_head</code> and <code>page_body</code> macro. If the <code>page_head</code> macro was not defined in <code>user.ftl</code>, then Freemarker would default to the macro defined in <code>base.ftl</code>. What if we want access to that macro in <code>user.ftl</code>, <em>and</em> we want to incorporate it into our own <code>page_head</code> macro? In the Twig template system you can use the <code>{{ parent() }}</code> tag to include it. In Freemarker, once we overwrite it, it is gone. So we need to get around it manually.</p>
+<p>The simplest way to do this is to define another macro and give it a prefix. I'll make a <code>page_head</code> and <code>common_page_head</code>. In the base template we define the default <code>page_head</code> to just include <code>common_page_head</code> and if we redefine the macro in a child template then we can call the common macro if we need it, recreating the feature of <code>{{ parent() }}</code>.</p>
+<div class="highlight"><pre><span class="nx">base.ftl</span><span class="p">:</span>
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">common_page_head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">meta</span> <span class="n">charset</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">page_head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="p">@</span><span class="nx">common_page_head</span><span class="o">/&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">page_body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Basic</span> <span class="nx">Page</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">This</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nb">body</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">page</span><span class="o">!&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">display_page</span><span class="o">&gt;</span>
+  <span class="o">&lt;!</span><span class="nb">doctype</span> <span class="nx">html</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">html</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">head</span><span class="o">&gt;</span> 
+      <span class="o">&lt;</span><span class="p">@</span><span class="nx">page_head</span><span class="o">/&gt;</span> 
+      <span class="o">&lt;</span><span class="nb">script</span> <span class="k">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/js/tracking.js&quot;</span><span class="o">&gt;&lt;/</span><span class="nb">script</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="nb">head</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">body</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nb">div</span> <span class="n">id</span><span class="o">=</span><span class="s2">&quot;nav&quot;</span><span class="o">&gt;&lt;</span><span class="nx">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="o">&gt;</span><span class="nb">Home</span><span class="o">&lt;/</span><span class="nx">a</span><span class="o">&gt;&lt;/</span><span class="nb">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="p">@</span><span class="nx">page_body</span><span class="o">/&gt;</span>
+    <span class="o">&lt;/</span><span class="nb">body</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="nx">html</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="nx">user.ftl</span><span class="p">:</span>
+<span class="o">&lt;</span><span class="vi">#include</span> <span class="s2">&quot;base.ftl&quot;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">page_head</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="p">@</span><span class="nx">common_page_head</span><span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="nb">title</span><span class="o">&gt;</span><span class="nb">User</span> <span class="nx">page</span><span class="o">&lt;/</span><span class="nb">title</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nb">script</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;/js/user.min.js&quot;</span><span class="o">&gt;&lt;/</span><span class="nb">script</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="vi">#macro</span> <span class="nx">page_body</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nb">User</span><span class="o">&lt;/</span><span class="nx">h1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">The</span> <span class="nb">user</span> <span class="nx">page</span><span class="o">!&lt;/</span><span class="nx">p</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="vi">#macro</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="p">@</span><span class="nx">display_page</span><span class="o">/&gt;</span>
+</pre></div>
+
+
+<p>Now that I have a <code>common_page_head</code> macro, I can put anything common to all the page heads in there. By default, if a template does not define a <code>page_head</code> macro we get <code>common_page_head</code> output. If a template does redefine the head macro then they have the option of including the common stuff. It's kind of annoying to have to define these extra macros when other template systems have the functions built in. But Freemarker is a popular system in Java and I don't see any other major template library that has inheritance built in.</p>
+<p>I hope this article was useful. :-)</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3 well well-sm" id="sidebar">
+
+<aside>
+    <section>
+        <ul class="list-group list-group-flush">
+                <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+                  <ul class="list-group" id="social">
+                    <li class="list-group-item"><a href="http://github.com/nickfun/"><i
+                            class="fa fa-github-square fa-lg"></i> GitHub
+                    </a></li>
+                    <li class="list-group-item"><a href="http://twitter.com/sevengraff"><i
+                            class="fa fa-twitter-square fa-lg"></i> twitter
+                    </a></li>
+                  </ul>
+                </li>
+
+
+
+                <li class="list-group-item"><a href="//nickfun.github.io/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                    <ul class="list-group" id="tags">
+                        <li class="list-group-item tag-1">
+                            <a href="//nickfun.github.io/tag/java.html">
+                                java
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="//nickfun.github.io/tag/web.html">
+                                web
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="//nickfun.github.io/tag/database.html">
+                                database
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="//nickfun.github.io/tag/python.html">
+                                python
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="//nickfun.github.io/tag/big-data.html">
+                                big-data
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="//nickfun.github.io/tag/work.html">
+                                work
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="//nickfun.github.io/tag/dropwizard.html">
+                                dropwizard
+                            </a>
+                        </li>
+                        <li class="list-group-item tag-4">
+                            <a href="//nickfun.github.io/tag/sql.html">
+                                sql
+                            </a>
+                        </li>
+                    </ul>
+                </li>    
+
+        </ul>
+    </section>
+
+</aside>        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2014 Nick Fun
+            &middot; Powered by <a href="https://github.com/DandyDev/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="//code.jquery.com/jquery.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="//nickfun.github.io/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="//nickfun.github.io/theme/js/respond.min.js"></script>
+
+</body>
+</html>
