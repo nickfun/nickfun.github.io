@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Implementation Specific</title><link href="https://nickfun.github.io/" rel="alternate"></link><link href="https://nickfun.github.io/feeds/code.atom.xml" rel="self"></link><id>https://nickfun.github.io/</id><updated>2014-10-09T15:04:00-07:00</updated><entry><title>Freemarker template inheritance</title><link href="https://nickfun.github.io/posts/2014/freemarker-template-inheritance.html" rel="alternate"></link><updated>2014-10-09T15:04:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:https://nickfun.github.io,2014-10-09:posts/2014/freemarker-template-inheritance.html</id><summary type="html">&lt;p&gt;Template systems like Twig in PHP and Jinja in Python allow for templates to inherit from a base template. In Freemarker you can do something similar but you have to set it up yourself using the macro system. At work we are using &lt;a href="http://freemarker.org/"&gt;Freemarker&lt;/a&gt; with &lt;a href="http://www.dropwizard.io/"&gt;Dropwizard&lt;/a&gt;. I was familiar with Twig and was hoping that we can get a simliar inheritance system in Freemarker. It's not in the docs, but it is possible to have the feature.&lt;/p&gt;
+&lt;p&gt;Freemarker lets you do some neat stuff. You can have a "base" template that defines the overall page structure, and then the actual template you want to write can just fill in the pieces. Here is how that will look:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;base.ftl&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;page_head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;title&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;Page&lt;/span&gt; &lt;span class="nb"&gt;title&lt;/span&gt;&lt;span class="o"&gt;!&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;title&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="k"&gt;link&lt;/span&gt; &lt;span class="n"&gt;rel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;stylesheet&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/css/default.css&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;page_body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;Basic&lt;/span&gt; &lt;span class="nx"&gt;Page&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;This&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nb"&gt;body&lt;/span&gt; &lt;span class="nx"&gt;of&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;page&lt;/span&gt;&lt;span class="o"&gt;!&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;display_page&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;!&lt;/span&gt;&lt;span class="nb"&gt;doctype&lt;/span&gt; &lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; 
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;page_head&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt; 
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;script&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/js/tracking.js&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;div&lt;/span&gt; &lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;nav&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;Home&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;div&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;page_body&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;user.ftl&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#include&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;base.ftl&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;page_head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;title&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;User&lt;/span&gt; &lt;span class="nx"&gt;page&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;title&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;script&lt;/span&gt; &lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/js/user.min.js&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;page_body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;User&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nb"&gt;user&lt;/span&gt; &lt;span class="nx"&gt;page&lt;/span&gt;&lt;span class="o"&gt;!&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;display_page&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Freemarker provides a powerful macro system that allows us to implement template inheritance. In base.ftl we define a few macros for the head and body of the page. Then we define the &lt;code&gt;display_page&lt;/code&gt; macro to wrap the head and body. In &lt;code&gt;display_page&lt;/code&gt; we get to define the basic structure of the page and include common things, like a user tracking code or page navigation. Templates can define what goes in the head and body by extending the base file, define their own macro named &lt;code&gt;page_head&lt;/code&gt;, &lt;code&gt;page_body&lt;/code&gt;, this overrides the macros defined in base.tpl, then call the wrapping macro &lt;code&gt;display_page&lt;/code&gt;. There can be more than one base template, and different page templates can include the one that works best for them. So we could have a &lt;code&gt;public_base.ftl&lt;/code&gt; and a &lt;code&gt;admin_base.ftl&lt;/code&gt; that define different wrappers but the individual templates still define their own head, body, etc.&lt;/p&gt;
+&lt;p&gt;In other template systems you are provided a &lt;code&gt;parent&lt;/code&gt; or &lt;code&gt;extends&lt;/code&gt; method along with &lt;code&gt;block&lt;/code&gt; tags to build up this kind of structure. In Freemarker it is still possible but you have to jump through the hoop of setting up macros to do it for you.&lt;/p&gt;
+&lt;h2&gt;Default Values&lt;/h2&gt;
+&lt;p&gt;In the above example, &lt;code&gt;user.ftl&lt;/code&gt; redefines the &lt;code&gt;page_head&lt;/code&gt; and &lt;code&gt;page_body&lt;/code&gt; macro. If the &lt;code&gt;page_head&lt;/code&gt; macro was not defined in &lt;code&gt;user.ftl&lt;/code&gt;, then Freemarker would default to the macro defined in &lt;code&gt;base.ftl&lt;/code&gt;. What if we want access to that macro in &lt;code&gt;user.ftl&lt;/code&gt;, &lt;em&gt;and&lt;/em&gt; we want to incorporate it into our own &lt;code&gt;page_head&lt;/code&gt; macro? In the Twig template system you can use the &lt;code&gt;{{ parent() }}&lt;/code&gt; tag to include it. In Freemarker, once we overwrite it, it is gone. So we need to get around it manually.&lt;/p&gt;
+&lt;p&gt;The simplest way to do this is to define another macro and give it a prefix. I'll make a &lt;code&gt;page_head&lt;/code&gt; and &lt;code&gt;common_page_head&lt;/code&gt;. In the base template we define the default &lt;code&gt;page_head&lt;/code&gt; to just include &lt;code&gt;common_page_head&lt;/code&gt; and if we redefine the macro in a child template then we can call the common macro if we need it, recreating the feature of &lt;code&gt;{{ parent() }}&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;base.ftl&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;common_page_head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;meta&lt;/span&gt; &lt;span class="n"&gt;charset&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;page_head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;common_page_head&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;page_body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;Basic&lt;/span&gt; &lt;span class="nx"&gt;Page&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;This&lt;/span&gt; &lt;span class="nx"&gt;is&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nb"&gt;body&lt;/span&gt; &lt;span class="nx"&gt;of&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="nx"&gt;page&lt;/span&gt;&lt;span class="o"&gt;!&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;display_page&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;!&lt;/span&gt;&lt;span class="nb"&gt;doctype&lt;/span&gt; &lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; 
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;page_head&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt; 
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;script&lt;/span&gt; &lt;span class="k"&gt;type&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;text/javascript&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/js/tracking.js&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;div&lt;/span&gt; &lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;nav&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;Home&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;a&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;div&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;page_body&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;html&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nx"&gt;user.ftl&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#include&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;base.ftl&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;page_head&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;common_page_head&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;title&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;User&lt;/span&gt; &lt;span class="nx"&gt;page&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;title&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nb"&gt;script&lt;/span&gt; &lt;span class="n"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/js/user.min.js&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class="nb"&gt;script&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt; &lt;span class="nx"&gt;page_body&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;User&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;h1&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nx"&gt;The&lt;/span&gt; &lt;span class="nb"&gt;user&lt;/span&gt; &lt;span class="nx"&gt;page&lt;/span&gt;&lt;span class="o"&gt;!&amp;lt;/&lt;/span&gt;&lt;span class="nx"&gt;p&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="vi"&gt;#macro&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="nx"&gt;display_page&lt;/span&gt;&lt;span class="o"&gt;/&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now that I have a &lt;code&gt;common_page_head&lt;/code&gt; macro, I can put anything common to all the page heads in there. By default, if a template does not define a &lt;code&gt;page_head&lt;/code&gt; macro we get &lt;code&gt;common_page_head&lt;/code&gt; output. If a template does redefine the head macro then they have the option of including the common stuff. It's kind of annoying to have to define these extra macros when other template systems have the functions built in. But Freemarker is a popular system in Java and I don't see any other major template library that has inheritance built in.&lt;/p&gt;
+&lt;p&gt;I hope this article was useful. :-)&lt;/p&gt;</summary><category term="java"></category><category term="web"></category><category term="dropwizard"></category></entry><entry><title>Emacs</title><link href="https://nickfun.github.io/posts/2014/emacs.html" rel="alternate"></link><updated>2014-05-11T23:01:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:https://nickfun.github.io,2014-05-11:posts/2014/emacs.html</id><summary type="html">&lt;p&gt;I believe I first used emacs back in my community college days. I had access to
+a Linux machine for a few classes. We often worked in the terminal and I needed
+a good text editor. I have tried vi &amp;amp; vim several times, but I could never get
+used to the idea of several modes. I would often switch to a different mode
+unexpectedly and things would get really bad. I never had &lt;em&gt;that&lt;/em&gt; problem with
+emacs, so I would usually use emacs.&lt;/p&gt;
+&lt;p&gt;Eventually, I tried diving in to emacs to see what I could get it to do. I knew
+it had a reputation for extensions and while I wasn't planning on writing my own
+I wanted to take advantage of anything that was out there. While reading some
+docs I found out how to split the window and view two files at the same time.
+That was when I decided to never even try vim again and to stay away from nano/pico.&lt;/p&gt;
+&lt;p&gt;My decision was justified once I learned about org-mode.&lt;/p&gt;
+&lt;p&gt;At work I have been using Org-mode to keep track of my time. Our bug tracker, Redmine,
+lets you log time for how long a bug takes. The boss has asked us to submit a time with
+bugs that we close. Org-mode makes it wicked easy to add task, clock in, and generate
+a report when needed. I've got a giant file that I've been keeping since the beginning
+of the year, 5 months ago. I should look into how to split it into different files.&lt;/p&gt;
+&lt;h2&gt;Time to go all in&lt;/h2&gt;
+&lt;p&gt;The other day I saw the "Emacs Rocks" video that showed multiple-cursors mode. I knew then
+that it was time to go all-in with emacs. Sublime text has been my main code editor
+since at least 2011. I have become very productive in it because of its built-in multi 
+cursor support. I had never used a system like that before and it was easy to see
+how I could use it to speed up dealing with code in patterns. &lt;/p&gt;
+&lt;p&gt;I haven't yet taken the time to setup multiple-cursors mode, but I am investing more in 
+emacs. I have it setup on my personal computers now. I setup the marmalade repo to 
+easily install plug-ins. I have chosen a theme to run with (zenburn) and will try
+to move myself into a emacs way of life.&lt;/p&gt;
+&lt;h2&gt;Emacs Lisp&lt;/h2&gt;
+&lt;p&gt;I have always wanted to learn Lisp or Scheme. In my Programming Language Concepts class
+in University we were given an intro to Scheme. I was pretty blown away by how different
+the language was to everything else I had used at that point. I was a pretty good
+programmer, but I had trouble wrapping my mind around Scheme. I have wanted to spend
+more time with it ever since, and I've never really been able to take it on.&lt;/p&gt;
+&lt;p&gt;Emacs is famous for having its own Lisp built in: elisp. Sadly, the language is really
+old and it has not evolved along with other languages. I understand the variable scope
+system is weird in elisp and it has bad support for namespaces. However, I still want
+to learn it. It will be profitable for me to learn to extend emacs, and I fill finally
+get to learn a lisp! I'm rather excited.&lt;/p&gt;
+&lt;p&gt;There is a "Intro to elisp" manual that GNU published a few years ago that they give
+away for free. I am slowly working through it. I keep a "stuff" repo on GitHub that
+I use for experiments. My plan now is that all my experiments will be Emacs oriented.&lt;/p&gt;</summary></entry></feed>
