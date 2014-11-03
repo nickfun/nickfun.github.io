@@ -7,3 +7,8 @@
 #archive-list-contents dd {
     padding-left: 30px;
 }
+
+/* Make header more prominent on index page */
+article > h2 {
+    border-bottom: 4px solid #dd4818; /* only use this color when using the UNITED theme */
+}
