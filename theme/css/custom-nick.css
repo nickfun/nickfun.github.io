@@ -12,3 +12,8 @@
 article > h2 {
     border-bottom: 4px solid #dd4818; /* only use this color when using the UNITED theme */
 }
+
+/* Main body text should be larger, I have bad eye-sight :( */
+article p {
+    font-size: 20px;
+}
