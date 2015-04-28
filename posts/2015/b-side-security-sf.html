@@ -3,7 +3,7 @@
       xmlns:og="http://ogp.me/ns#"
       xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
-    <title>Switching to Java at work - Implementation Specific</title>
+    <title>B-Side Security SF - Implementation Specific</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -13,9 +13,9 @@
 
     <!-- Open Graph tags -->
             <meta property="og:type" content="article"/>
-            <meta property="og:title" content="Switching to Java at work"/>
-            <meta property="og:url" content="https://nickfun.github.io/posts/2014/switching-to-java-at-work.html"/>
-            <meta property="og:description" content="So at my day job I have always used PHP for back-end work. But I am happy so say that I finally get to expand into Java for some things! I know that Java as a language is not the hottest thing anymore, but I think it is really good ..."/>
+            <meta property="og:title" content="B-Side Security SF"/>
+            <meta property="og:url" content="https://nickfun.github.io/posts/2015/b-side-security-sf.html"/>
+            <meta property="og:description" content="I went to day one of the 2015 B-Side Security SF conference. I was expecting a small local conference but it was a pretty good sized event with a lot of people there. The focus was on the talks and networking, no vendors hawking their security wares. I went with ..."/>
 
     <!-- Bootstrap -->
         <link rel="stylesheet" href="https://nickfun.github.io/theme/css/bootstrap.united.min.css" type="text/css"/>
@@ -71,10 +71,10 @@ Implementation Specific            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://nickfun.github.io/posts/2014/switching-to-java-at-work.html"
+                    <a href="https://nickfun.github.io/posts/2015/b-side-security-sf.html"
                        rel="bookmark"
-                       title="Permalink to Switching to Java at work">
-                        Switching to Java at work
+                       title="Permalink to B-Side Security SF">
+                        B-Side Security SF
                     </a>
                 </h1>
             </header>
@@ -84,36 +84,28 @@ Implementation Specific            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2014-05-08T13:37:00"> Thu 08 May 2014</time>
+        <i class="fa fa-calendar"></i><time datetime="2015-04-22T16:53:00"> Wed 22 April 2015</time>
     </span>
     <span class="label">By</span>
     <a href="https://nickfun.github.io/"><i class="fa fa-user"></i> Nick Fun</a>
 
 
 
+<span class="label label-default">Tags</span>
+	<a href="https://nickfun.github.io/tag/event.html">event</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>So at my day job I have always used PHP for back-end work. But I am happy so say that I finally get to expand into Java for
-some things! I know that Java as a language is not the hottest thing anymore, but I think it is really good for me to
-move away from PHP.</p>
-<h2>Transition away</h2>
-<p>We already have a network server written in Java: the "ATP Client" and now we are expanding to at least one more Java
-system and maybe another. My coworker and I are building a reporting system in Java. It is rather boring and complex
-but I'm happy to be moving into a "real" language because PHP just can't deal with the things we want to do.</p>
-<p>PHP is the worst environment to do background processing. We want Reports and a few other things to run in the background,
-so we have to bring in something better. Pretty much everything is better than PHP.</p>
-<h2>Outlook</h2>
-<p>I'm glad that we are introducing more Java into the project. Currently, the report server runs inside Tomcat so that
-we can communicate with it over HTTP. There is talk of bringing in RabbitMQ, and I really hope it happens. Then we can
-drop Tomcat and just communicate with the report server on the message queue. That will be cleaner, I think.</p>
-<p>Eventually I think we will have to re-write all of the web back-end, and I hope we get to do that in a language other
-than PHP also. I think Groovy or Python would be a great fit for us. We can keep coding without worrying about types
-or defining our data structures with classes, and we will have better access to background processing.</p>
-<h2>Dev notes</h2>
-<p>We are using Netbeans to develop or new java code. The boss, who wrote the current Java network server, doesn't use a 
-full IDE for development. He uses UEEditor I think. It's like a super-powered version of Notepad++. I like Netbeans a lot
-and it has been pretty smooth. I love that now I can setup unit tests and easily run them. </p>
+                <p>I went to day one of the 2015 B-Side Security SF conference. I was expecting a small local conference but it was a pretty good sized event with a lot of people there. The focus was on the talks and networking, no vendors hawking their security wares. I went with a coworker from Twilio and enjoyed the event. It was a two day event but I wasn't able to go to day two on Monday.</p>
+<h2>Talks</h2>
+<p>I saw three talks on Sunday. The first was put on by OSi Soft about using the cloud to host critical infrastructure. Since my company is all about the cloud I sat through it. What they mean by "Critical Infrastructure" is things like public service such as the power grid and 911 Phone Operators. The format of the talk was pretty good, the two presenters took turns presenting arguments against using the cloud to host these things and then the other presenter countered the arguments. The style of mock-debate was pretty good, but the arguments that they used felt superficial. Their reasoning was pretty high level and I think everyone there was hoping for more specific, technical arguments. Overall, not a worthwhile talk.</p>
+<p>The next talk was the best, put on by Lisa Lorenzin. She didn't represent a company, just herself, and the talk was about her personal actions and research into not being caught up in government surveillance. Lots of emotion and very practical advice on keeping your data to yourself. She also discussed much of the political fallout that came about by Edward Snowden.</p>
+<p>The last talk was given by a research at OpenDSN. He gave a talk about how the number of DNS requests a host makes can be used to help determine if the machine has been compromised. The talk started off pretty interesting, but the presenter went very deep into the math behind his work and I could not follow along. I got the basic idea, that statistical analysis can be used to flag machines as possibly being compromised, and that a lot of work goes into avoiding false positives, but the details were way over my head. The talk was mostly on the math. I would have liked a less technical discussion.</p>
+<h2>Workshop</h2>
+<p>The highlight of the day was after lunch, <a href="http://samsclass.info">Sam Bowne</a> put on a workshop based on the "Violent Python" book. Even as a newbie to python I found the class very helpful. He has the class material posted on his site and I plan on going through a few more pages of work when I get a chance.</p>
+<p>Sam also gave a few informal talks and told some stories of his times searching the web for exploits and also finding machines that had been compromised by others. He had some very interesting experiences to share and if you see Sam Bowne on a talk at a security con I highly recommend him!</p>
+<h2>Conclusion</h2>
+<p>The day was very enjoyable and I was impressed by what B-Side put on. Big thanks to the sponsors and others who made the con possible. I plan to go next time it is in town.</p>
             </div>
             <!-- /.entry-content -->
     <hr />
@@ -123,8 +115,8 @@ and it has been pretty smooth. I love that now I can setup unit tests and easily
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'nickfun'; // required: replace example with your forum shortname
-            var disqus_identifier = 'switching-to-java-at-work';
-            var disqus_url = 'https://nickfun.github.io/posts/2014/switching-to-java-at-work.html';
+            var disqus_identifier = 'b-side-security-sf';
+            var disqus_url = 'https://nickfun.github.io/posts/2015/b-side-security-sf.html';
             var disqus_config = function () {
                 this.language = "en";
             };
