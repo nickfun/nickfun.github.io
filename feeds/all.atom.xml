@@ -283,7 +283,16 @@ or defining our data structures with classes, and we will have better access to 
 &lt;h2&gt;Dev notes&lt;/h2&gt;
 &lt;p&gt;We are using Netbeans to develop or new java code. The boss, who wrote the current Java network server, doesn't use a 
 full IDE for development. He uses UEEditor I think. It's like a super-powered version of Notepad++. I like Netbeans a lot
-and it has been pretty smooth. I love that now I can setup unit tests and easily run them. &lt;/p&gt;</summary></entry><entry><title>I'm a Coder Dojo Mentor</title><link href="https://nickfun.github.io/posts/2014/im-a-coder-dojo-mentor.html" rel="alternate"></link><updated>2014-04-21T16:54:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:https://nickfun.github.io,2014-04-21:posts/2014/im-a-coder-dojo-mentor.html</id><summary type="html">&lt;h2&gt;April 12th Event&lt;/h2&gt;
+and it has been pretty smooth. I love that now I can setup unit tests and easily run them. &lt;/p&gt;</summary></entry><entry><title>B-Side Security SF</title><link href="https://nickfun.github.io/posts/2014/b-side-security-sf.html" rel="alternate"></link><updated>2014-04-22T16:53:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:https://nickfun.github.io,2014-04-22:posts/2014/b-side-security-sf.html</id><summary type="html">&lt;p&gt;I went to day one of the 2015 B-Side Security SF conference. I was expecting a small local conference but it was a pretty good sized event with a lot of people there. The focus was on the talks and networking, no vendors hawking their security wares. I went with a coworker from Twilio and enjoyed the event. It was a two day event but I wasn't able to go to day two on Monday.&lt;/p&gt;
+&lt;h2&gt;Talks&lt;/h2&gt;
+&lt;p&gt;I saw three talks on Sunday. The first was put on by OSi Soft about using the cloud to host critical infrastructure. Since my company is all about the cloud I sat through it. What they mean by "Critical Infrastructure" is things like public service such as the power grid and 911 Phone Operators. The format of the talk was pretty good, the two presenters took turns presenting arguments against using the cloud to host these things and then the other presenter countered the arguments. The style of mock-debate was pretty good, but the arguments that they used felt superficial. Their reasoning was pretty high level and I think everyone there was hoping for more specific, technical arguments. Overall, not a worthwhile talk.&lt;/p&gt;
+&lt;p&gt;The next talk was the best, put on by Lisa Lorenzin. She didn't represent a company, just herself, and the talk was about her personal actions and research into not being caught up in government surveillance. Lots of emotion and very practical advice on keeping your data to yourself. She also discussed much of the political fallout that came about by Edward Snowden.&lt;/p&gt;
+&lt;p&gt;The last talk was given by a research at OpenDSN. He gave a talk about how the number of DNS requests a host makes can be used to help determine if the machine has been compromised. The talk started off pretty interesting, but the presenter went very deep into the math behind his work and I could not follow along. I got the basic idea, that statistical analysis can be used to flag machines as possibly being compromised, and that a lot of work goes into avoiding false positives, but the details were way over my head. The talk was mostly on the math. I would have liked a less technical discussion.&lt;/p&gt;
+&lt;h2&gt;Workshop&lt;/h2&gt;
+&lt;p&gt;The highlight of the day was after lunch, &lt;a href="http://samsclass.info"&gt;Sam Bowne&lt;/a&gt; put on a workshop based on the "Violent Python" book. Even as a newbie to python I found the class very helpful. He has the class material posted on his site and I plan on going through a few more pages of work when I get a chance.&lt;/p&gt;
+&lt;p&gt;Sam also gave a few informal talks and told some stories of his times searching the web for exploits and also finding machines that had been compromised by others. He had some very interesting experiences to share and if you see Sam Bowne on a talk at a security con I highly recommend him!&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;The day was very enjoyable and I was impressed by what B-Side put on. Big thanks to the sponsors and others who made the con possible. I plan to go next time it is in town.&lt;/p&gt;</summary></entry><entry><title>I'm a Coder Dojo Mentor</title><link href="https://nickfun.github.io/posts/2014/im-a-coder-dojo-mentor.html" rel="alternate"></link><updated>2014-04-21T16:54:00-07:00</updated><author><name>Nick Fun</name></author><id>tag:https://nickfun.github.io,2014-04-21:posts/2014/im-a-coder-dojo-mentor.html</id><summary type="html">&lt;h2&gt;April 12th Event&lt;/h2&gt;
 &lt;p&gt;So I was able to get in contact with Mike at the San Francisco Coder Dojo. He is the guy I talked to at the Geeks 4 Good Jam earlier.
 I showed up a little early and found a few people sanding outside the door. I had hoped that by getting there early I could help 
 with any setup, but no one could enter the space early so I just hung out. Mike was already there too and was trying to get access. 
@@ -355,21 +364,4 @@ free programmers. But she gave me a lot of details and I got the feeling that sh
 projects that they promote on the site. I have not yet signed up there but I plan to. It seems that only about 10% of the
 people who sign up ever get around to working on a project, but hey I could be one of those 10%!&lt;/p&gt;
 &lt;p&gt;I didn't have much time to talk to the person who invited me. I was surprised that she was one of the organizers of the Jam, 
-not just passing along invitations on Facebook! We gave vague statements to seeing each other again, I hope we do.&lt;/p&gt;</summary></entry><entry><title>Background</title><link href="https://nickfun.github.io/posts/2014/background.html" rel="alternate"></link><updated>2014-02-22T23:49:00-08:00</updated><author><name>Nick Fun</name></author><id>tag:https://nickfun.github.io,2014-02-22:posts/2014/background.html</id><summary type="html">&lt;h2&gt;Computers&lt;/h2&gt;
-&lt;p&gt;My first computer was a Commodore 64. That was released in 1982, but I wasn't even born yet. I had mine
-in the early 90s. All our stuff came from garage sales or the discount rack back then. We only used the C64 for
-playing games. I remember really enjoying &lt;em&gt;Blue Max&lt;/em&gt; and &lt;em&gt;Archon&lt;/em&gt;. Eventually we got a Windows 95 machine
-that we used for schoolwork and games. Mostly Starcraft and doom clones.&lt;/p&gt;
-&lt;h2&gt;Programming&lt;/h2&gt;
-&lt;p&gt;I learned HTML from a website that was called &lt;em&gt;HTML Goodies&lt;/em&gt;. It might still be out there. I learned HTML4
-and very little CSS. I wasn't really interested in CSS, I've never had success making designs. &lt;/p&gt;
-&lt;p&gt;PHP I also learned on my own by just reading up various tutorials on the web and spending a lot of time
-in the docs section of php.net. Same for MySQL. I wrote some amateur code back in the day, but I think that
-these days I write "good" PHP, or about as good as PHP can get.&lt;/p&gt;
-&lt;p&gt;I made some simple stuff, made a few complex things. In my early days I was most proud of a phpMyAdmin-like
-app that worked on a flat-file database called TextDB. And, of course, &lt;em&gt;NewLife Blogger&lt;/em&gt;. I'll have to dedicate
-a whole page to that one day. It's worth it.&lt;/p&gt;
-&lt;p&gt;Eventually, I signed up for a real programming class. I remember Keith Mehl's Intro to C++ class. It was amazing.
-The teacher knew everything and had a million stories of being a coder at a real company. He was excellent at teacing
-the fundaments and I still remember his lessons on abstraction. I haven't regretted becoming a software engineer.&lt;/p&gt;
-&lt;p&gt;I'm trying to make a transition from a PHP dev to a Java dev. Hopefully it all works out for the best!&lt;/p&gt;</summary></entry></feed>
+not just passing along invitations on Facebook! We gave vague statements to seeing each other again, I hope we do.&lt;/p&gt;</summary></entry></feed>
